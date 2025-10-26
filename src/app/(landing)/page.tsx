@@ -5,6 +5,7 @@ import ScrollReveal from "@/components/motion/ScrollReveal";
 import VvellfloLogo from "@/components/icons/VvellfloLogo";
 import BentoGrid from "@/components/blog/BentoGrid";
 import { toastInfo, toastSuccess } from "@/lib/toast";
+import { FiLayers, FiBookOpen, FiZap } from "react-icons/fi";
 
 export default function LandingPage() {
   const handleExploreClick = useCallback(() => {
@@ -80,26 +81,15 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <ScrollReveal delay={0.1}>
-              <div className="p-8 rounded-2xl bg-[--surface] hover:bg-[--surface-hover] transition-colors border border-[--border]">
-                <div className="w-12 h-12 bg-gradient-to-r from-[--primary-from] to-[--primary-to] rounded-lg mb-4 flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+              <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-[--surface] to-[rgba(125,213,243,0.03)] hover:from-[rgba(125,213,243,0.08)] hover:to-[rgba(255,239,167,0.05)] transition-all duration-500 border border-[--border] hover:border-[--primary-from]/40 hover:shadow-[0_12px_40px_rgba(125,213,243,0.15)] overflow-hidden cursor-pointer transform hover:translate-y-[-4px]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[--primary-from]/5 via-transparent to-[--primary-to]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative w-14 h-14 bg-gradient-to-br from-[--primary-from] to-[--primary] rounded-xl mb-5 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                  <FiLayers className="w-7 h-7 text-[--background]" />
                 </div>
                 <h3 className="text-2xl font-bold text-[--text-primary] mb-4">
                   단계별 콘텐츠
                 </h3>
-                <p className="text-[--text-secondary]">
+                <p className="relative text-[--text-secondary] leading-relaxed">
                   초보자부터 전문가까지, 자신에게 맞는 레벨의 콘텐츠를 선택해
                   즐길 수 있습니다
                 </p>
@@ -107,52 +97,30 @@ export default function LandingPage() {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <div className="p-8 rounded-2xl bg-[--surface] hover:bg-[--surface-hover] transition-colors border border-[--border]">
-                <div className="w-12 h-12 bg-gradient-to-r from-[--primary-from] to-[--primary-to] rounded-lg mb-4 flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                    />
-                  </svg>
+              <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-[--surface] to-[rgba(189,226,125,0.03)] hover:from-[rgba(189,226,125,0.08)] hover:to-[rgba(125,213,243,0.05)] transition-all duration-500 border border-[--border] hover:border-[--primary]/40 hover:shadow-[0_12px_40px_rgba(189,226,125,0.15)] overflow-hidden cursor-pointer transform hover:translate-y-[-4px]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[--primary]/5 via-transparent to-[--primary-from]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative w-14 h-14 bg-gradient-to-br from-[--primary] to-[--primary-to] rounded-xl mb-5 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                  <FiBookOpen className="w-7 h-7 text-[--background]" />
                 </div>
                 <h3 className="text-2xl font-bold text-[--text-primary] mb-4">
                   다양한 주제
                 </h3>
-                <p className="text-[--text-secondary]">
+                <p className="relative text-[--text-secondary] leading-relaxed">
                   운동, 영양, 정신건강 등 건강한 삶의 모든 측면을 다룹니다
                 </p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3}>
-              <div className="p-8 rounded-2xl bg-[--surface] hover:bg-[--surface-hover] transition-colors border border-[--border]">
-                <div className="w-12 h-12 bg-gradient-to-r from-[--primary-from] to-[--primary-to] rounded-lg mb-4 flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
+              <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-[--surface] to-[rgba(255,239,167,0.03)] hover:from-[rgba(255,239,167,0.08)] hover:to-[rgba(189,226,125,0.05)] transition-all duration-500 border border-[--border] hover:border-[--primary-to]/40 hover:shadow-[0_12px_40px_rgba(255,239,167,0.15)] overflow-hidden cursor-pointer transform hover:translate-y-[-4px]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[--primary-to]/5 via-transparent to-[--primary]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative w-14 h-14 bg-gradient-to-br from-[--primary-to] to-[--primary-from] rounded-xl mb-5 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                  <FiZap className="w-7 h-7 text-[--background]" />
                 </div>
                 <h3 className="text-2xl font-bold text-[--text-primary] mb-4">
                   실천 가능한 팁
                 </h3>
-                <p className="text-[--text-secondary]">
+                <p className="relative text-[--text-secondary] leading-relaxed">
                   일상에서 바로 적용할 수 있는 실용적인 건강 관리 방법을
                   제공합니다
                 </p>
@@ -184,8 +152,9 @@ export default function LandingPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.4}>
-            <button className="px-8 py-4 bg-white text-[--primary] rounded-lg hover:bg-gray-100 transition-colors text-lg font-medium shadow-lg">
-              블로그 보러가기
+            <button className="group relative px-8 py-4 bg-[--background] text-white border-2 border-white/30 hover:border-white rounded-lg overflow-hidden transition-all duration-300 text-lg font-semibold shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95">
+              <span className="relative z-10">블로그 보러가기</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </ScrollReveal>
         </div>

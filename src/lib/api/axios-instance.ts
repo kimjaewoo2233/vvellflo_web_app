@@ -8,8 +8,12 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 
 // 환경변수에서 API 키와 베이스 URL 가져오기
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY || "test";
+
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000/";
+
+// const BASE_URL =
+//   process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.vvellflo.com/";
 
 // Axios 인스턴스 생성
 const axiosInstance: AxiosInstance = axios.create({

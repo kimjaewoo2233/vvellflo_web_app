@@ -70,7 +70,7 @@ export default function BentoGrid() {
               오늘의 추천 루틴
             </h2>
             <p className="text-[--text-secondary] text-[15px]">
-              전문가가 큐레이션한 200+ 웰니스 콘텐츠
+              큐레이션된 200+ 웰니스 콘텐츠
             </p>
           </div>
         </ScrollReveal>
@@ -83,9 +83,7 @@ export default function BentoGrid() {
               title={post.title}
               category={post.category.name}
               thumbnail={post.thumbnail}
-              excerpt={
-                index === 0 ? post.content.substring(0, 100) : undefined
-              }
+              excerpt={index === 0 ? post.content.substring(0, 100) : undefined}
               meta={
                 index === 0
                   ? { duration: "5 Min", level: "Beginner" }

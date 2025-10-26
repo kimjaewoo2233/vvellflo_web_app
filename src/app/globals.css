@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'GMarketSans';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  font-family: "GMarketSans";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+    format("woff");
   font-weight: 300;
   font-display: swap;
 }
@@ -11,79 +12,111 @@
 .vvellflo-toast-container {
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
     sans-serif;
-  padding: 12px;
+  padding: 16px 0 0;
 }
 
 .vvellflo-toast-container .Toastify__toast {
-  background: rgba(18, 18, 18, 0.92);
+  background: rgba(16, 18, 22, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 16px 18px;
+  border-radius: 18px;
+  padding: 18px 22px;
   color: var(--text-primary);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 60px rgba(3, 7, 18, 0.68);
+  backdrop-filter: blur(14px);
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 16px;
+  min-width: min(420px, 90vw);
+  border-top: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.vvellflo-toast-container .Toastify__toast:before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at top,
+    rgba(125, 213, 243, 0.18),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.vvellflo-toast-container .Toastify__toast:hover:before {
+  opacity: 1;
 }
 
 .vvellflo-toast-container .Toastify__toast--success {
-  border-left: 3px solid var(--primary-from);
+  border-top-color: var(--primary-from);
 }
 
 .vvellflo-toast-container .Toastify__toast--info {
-  border-left: 3px solid var(--primary);
+  border-top-color: var(--primary);
 }
 
 .vvellflo-toast-container .Toastify__toast--error {
-  border-left: 3px solid #f87171;
+  border-top-color: #f87171;
 }
 
 .vvellflo-toast-container .Toastify__toast--warning {
-  border-left: 3px solid #facc15;
+  border-top-color: #facc15;
 }
 
-.vvellflo-toast-container .Toastify__toast-icon svg {
-  width: 22px;
-  height: 22px;
-}
-
-.vvellflo-toast-container .Toastify__toast-body {
-  font-size: 0.95rem;
-  line-height: 1.5;
+.vvellflo-toast-body {
+  font-size: 0.98rem;
+  line-height: 1.6;
   margin: 0;
+  text-align: left;
+  flex: 1;
 }
 
-.vvellflo-toast-container .Toastify__close-button {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.vvellflo-toast-container .Toastify__close-button:hover,
-.vvellflo-toast-container .Toastify__close-button:focus {
-  color: var(--text-primary);
-}
-
-.vvellflo-toast-container .Toastify__progress-bar {
+.vvellflo-toast-progress {
   background: linear-gradient(90deg, var(--primary-from), var(--primary-to));
   height: 4px;
   border-radius: 999px;
+}
+
+.vvellflo-toast-close {
+  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+  transition: all 0.25s ease;
+}
+
+.vvellflo-toast-close:hover,
+.vvellflo-toast-close:focus-visible {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.vvellflo-toast-container .Toastify__toast-icon {
+  display: none;
 }
 
 :root {
   /* Dark theme colors */
   --background: #0a0a0a;
   --foreground: #ededed;
-  
+
   /* Brand colors - Cyan to Yellow gradient (vvellflo) */
-  --primary-from: #7DD5F3;
-  --primary-to: #FFEFA7;
-  --primary: #BDE27D;
-  
+  --primary-from: #7dd5f3;
+  --primary-to: #ffefa7;
+  --primary: #bde27d;
+
   /* Surface colors */
   --surface: #1a1a1a;
   --surface-hover: #2a2a2a;
   --border: #333333;
-  
+
   /* Text colors */
   --text-primary: #ffffff;
   --text-secondary: #a1a1aa;
@@ -93,17 +126,17 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   /* Custom brand colors */
   --color-primary-from: var(--primary-from);
   --color-primary-to: var(--primary-to);
   --color-primary: var(--primary);
-  
+
   /* Surface colors */
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-border: var(--border);
-  
+
   /* Text colors */
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
