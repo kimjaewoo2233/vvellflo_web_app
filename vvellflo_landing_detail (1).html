@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vvellflo - 5분으로 시작하는 나만의 웰니스 루틴</title>
+    <style>
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff'); font-weight: 400; }
+        @font-face { font-family: 'SUIT'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Bold.woff2') format('woff2'); font-weight: 700; }
+        @font-face { font-family: 'SUIT'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-ExtraBold.woff2') format('woff2'); font-weight: 800; }
+        @font-face { font-family: 'KoPub Batang'; src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/KoPubBatangLight.woff') format('woff'); font-weight: 300; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #FFBD07; --primary-light: #FFEFA7; --accent: #7DD5F3; --background: #0A0A0A; --surface: #151515; --text-primary: #FFFFFF; --text-secondary: #A0A0A0; --text-muted: #6B6B6B; --border: rgba(255, 255, 255, 0.08); --gradient-primary: linear-gradient(135deg, #7DD5F3 0%, #FFEFA7 100%); --gradient-dark: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.95) 100%); --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.8); --glow: 0 0 40px rgba(255, 189, 7, 0.3); --font-serif: 'KoPub Batang', serif; --font-sans: 'Pretendard', -apple-system, sans-serif; --font-display: 'SUIT', 'Pretendard', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); background: var(--background); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+        header { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; transition: all 0.4s; }
+        header.scrolled { background: rgba(10, 10, 10, 0.95); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { cursor: pointer; height: 40px; display: flex; align-items: center; }
+        .logo img { height: 100%; width: auto; }
+        .nav-menu { display: flex; gap: 48px; list-style: none; }
+        .nav-menu a { color: var(--text-secondary); text-decoration: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.4s; }
+        .nav-menu a:hover { color: var(--text-primary); }
+        .icon-btn { width: 44px; height: 44px; border-radius: 50%; background: transparent; border: 1px solid var(--border); color: var(--text-secondary); cursor: pointer; transition: all 0.4s; display: flex; align-items: center; justify-content: center; }
+        .icon-btn:hover { color: var(--text-primary); border-color: var(--primary); }
+        .menu-icon { display: none; }
+        .hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: 140px 40px 100px; position: relative; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(125, 213, 243, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255, 239, 167, 0.06) 0%, transparent 50%); animation: pulseGlow 8s ease-in-out infinite; }
+        @keyframes pulseGlow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .hero-content { max-width: 1100px; text-align: center; position: relative; z-index: 2; }
+        .hero-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 32px; }
+        .hero-title { font-family: var(--font-display); font-size: 96px; font-weight: 800; line-height: 1.1; margin-bottom: 32px; letter-spacing: -2px; }
+        .hero-title span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 19px; color: var(--text-secondary); margin-bottom: 48px; line-height: 1.7; max-width: 650px; margin-left: auto; margin-right: auto; }
+        .hero-cta { display: flex; gap: 20px; justify-content: center; }
+        .cta-button { padding: 18px 48px; border: 1px solid var(--primary); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.6s; background: transparent; color: var(--primary); }
+        .cta-button:hover { background: var(--primary); color: var(--background); box-shadow: var(--glow); }
+        .cta-button-primary { background: var(--primary); color: var(--background); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 100px 40px; }
+        .section-header { margin-bottom: 64px; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+        .section-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px; }
+        .section-title { font-family: var(--font-display); font-size: 56px; font-weight: 700; margin-bottom: 12px; }
+        .section-subtitle { color: var(--text-secondary); font-size: 15px; }
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+        .editorial-card { background: var(--surface); border: 1px solid var(--border); overflow: hidden; cursor: pointer; transition: all 0.6s; }
+        .editorial-card:hover { border-color: var(--accent); box-shadow: var(--shadow-lg); }
+        .editorial-featured { grid-column: 1 / 9; grid-row: 1 / 3; min-height: 600px; }
+        .editorial-hero-1 { grid-column: 9 / 13; }
+        .editorial-hero-2 { grid-column: 9 / 13; }
+        .editorial-equal-1 { grid-column: 1 / 5; }
+        .editorial-equal-2 { grid-column: 5 / 9; }
+        .editorial-equal-3 { grid-column: 9 / 13; }
+        .editorial-wide { grid-column: 1 / 7; }
+        .editorial-side-1 { grid-column: 7 / 10; }
+        .editorial-side-2 { grid-column: 10 / 13; }
+        .editorial-compact-1 { grid-column: 1 / 4; }
+        .editorial-compact-2 { grid-column: 4 / 7; }
+        .editorial-tall { grid-column: 7 / 13; }
+        .card-image-wrapper { position: relative; overflow: hidden; aspect-ratio: 4/5; }
+        .editorial-featured .card-image-wrapper { height: 100%; aspect-ratio: 3/4; }
+        .editorial-hero-1 .card-image-wrapper, .editorial-hero-2 .card-image-wrapper { aspect-ratio: 1/1; }
+        .editorial-wide .card-image-wrapper, .editorial-tall .card-image-wrapper { aspect-ratio: 16/10; }
+        .card-image { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s, filter 0.6s; filter: brightness(0.85); }
+        .editorial-card:hover .card-image { transform: scale(1.06); filter: brightness(1); }
+        .card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; background: var(--gradient-dark); }
+        .card-category { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; font-weight: 600; }
+        .card-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+        .editorial-featured .card-title { font-size: 40px; }
+        .card-excerpt { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+        .card-meta { display: flex; gap: 14px; font-size: 11px; color: var(--text-muted); }
+        .features-section { background: var(--surface); padding: 140px 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .features-container { max-width: 1200px; margin: 0 auto; }
+        .features-header { text-align: center; margin-bottom: 100px; }
+        .features-header h2 { font-family: var(--font-display); font-size: 56px; font-weight: 700; margin-bottom: 24px; }
+        .features-header p { font-size: 18px; color: var(--text-secondary); }
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 80px; }
+        .feature-item { display: flex; gap: 32px; align-items: flex-start; }
+        .feature-icon { width: 64px; height: 64px; background: rgba(255, 189, 7, 0.1); border: 1px solid var(--border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; }
+        .feature-content h3 { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+        .feature-content p { font-size: 16px; color: var(--text-secondary); line-height: 1.7; }
+        .expertise-section { padding: 140px 40px; background: var(--surface); border-top: 1px solid var(--border); }
+        .expertise-container { max-width: 1200px; margin: 0 auto; text-align: center; }
+        .expertise-header { margin-bottom: 80px; }
+        .expertise-header h2 { font-family: var(--font-display); font-size: 56px; font-weight: 700; margin-bottom: 24px; }
+        .expertise-header p { font-size: 18px; color: var(--text-secondary); }
+        .experts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+        .expert-card { text-align: center; }
+        .expert-avatar { width: 120px; height: 120px; background: var(--background); border: 2px solid var(--border); border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .expert-name { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+        .expert-title { font-size: 14px; color: var(--accent); margin-bottom: 16px; }
+        .expert-bio { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+        .final-cta { background: linear-gradient(180deg, var(--background) 0%, var(--surface) 100%); padding: 140px 40px; text-align: center; border-top: 1px solid var(--border); }
+        .final-cta h2 { font-family: var(--font-display); font-size: 64px; font-weight: 700; margin-bottom: 32px; }
+        .final-cta p { font-size: 20px; color: var(--text-secondary); margin-bottom: 48px; }
+        .app-store-buttons { display: flex; gap: 16px; justify-content: center; margin-bottom: 48px; }
+        .app-store-btn { display: flex; align-items: center; gap: 12px; padding: 16px 32px; background: var(--primary); border: 2px solid var(--primary); border-radius: 12px; color: var(--background); text-decoration: none; transition: all 0.5s; }
+        .app-store-btn:hover { background: var(--background); color: var(--primary); transform: translateY(-4px); }
+        .app-store-label { font-size: 10px; text-transform: uppercase; }
+        .app-store-name { font-size: 16px; font-weight: 600; }
+        .free-note { font-size: 13px; color: var(--text-muted); }
+        footer { background: var(--background); border-top: 1px solid var(--border); padding: 80px 40px 40px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
+        .footer-brand-section { max-width: 400px; }
+        .footer-brand { height: 48px; margin-bottom: 16px; }
+        .footer-brand img { height: 100%; width: auto; }
+        .footer-tagline { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+        .footer-legal { display: flex; gap: 32px; }
+        .footer-legal a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .footer-legal a:hover { color: var(--primary); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--text-muted); }
+        .scroll-top { position: fixed; bottom: 40px; right: 40px; width: 56px; height: 56px; background: var(--primary); border: none; border-radius: 50%; color: var(--background); font-size: 20px; cursor: pointer; opacity: 0; transform: translateY(20px); transition: all 0.4s; z-index: 99; box-shadow: 0 4px 20px rgba(255, 189, 7, 0.4); }
+        .scroll-top.visible { opacity: 1; transform: translateY(0); }
+        .scroll-top:hover { background: var(--background); color: var(--primary); border: 2px solid var(--primary); box-shadow: var(--glow); }
+
+        /* 상세페이지 - Vogue 스타일 */
+        .detail-page { display: none; opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+        .detail-page.active { display: block; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .detail-content { max-width: 800px; margin: 80px auto 120px; padding: 0 40px; }
+        .detail-back { display: inline-flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 48px; transition: gap 0.3s, color 0.3s; }
+        .detail-back:hover { color: var(--primary); gap: 16px; }
+        .detail-category { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 24px; font-weight: 600; }
+        .detail-title { font-family: var(--font-serif); font-size: 56px; font-weight: 300; line-height: 1.15; margin-bottom: 32px; letter-spacing: -0.5px; }
+        .detail-meta { display: flex; gap: 24px; font-size: 12px; color: var(--text-muted); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+        .detail-meta-item { display: flex; align-items: center; gap: 8px; }
+        .detail-image { width: calc(100% + 80px); margin-left: -40px; margin-bottom: 16px; }
+        .detail-image img { width: 100%; height: auto; display: block; }
+        .detail-image-caption { font-size: 12px; color: var(--text-muted); font-style: italic; text-align: center; margin-bottom: 48px; }
+        .detail-image-small { width: 100%; margin: 48px 0; }
+        .detail-image-small img { width: 100%; height: auto; }
+        .detail-paragraph { font-size: 18px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 32px; }
+        .detail-paragraph:first-of-type::first-letter { font-size: 72px; line-height: 1; float: left; margin: 0 12px 0 0; font-family: var(--font-serif); color: var(--primary); }
+        .detail-subheading { font-family: var(--font-serif); font-size: 32px; font-weight: 400; margin: 64px 0 24px; line-height: 1.3; }
+        .detail-quote { border-left: 3px solid var(--primary); padding-left: 32px; margin: 48px 0; font-family: var(--font-serif); font-size: 24px; line-height: 1.6; color: var(--text-primary); font-style: italic; }
+
+        .main-page { display: block; }
+        .main-page.hidden { display: none; }
+
+        @media (max-width: 1024px) {
+            .nav-menu { display: none; } .menu-icon { display: flex; } .hero-title { font-size: 64px; } .section-title { font-size: 40px; }
+            .bento-grid { grid-template-columns: repeat(6, 1fr); }
+            .editorial-featured, .editorial-hero-1, .editorial-hero-2, .editorial-wide, .editorial-tall { grid-column: 1 / 7; }
+            .editorial-equal-1, .editorial-equal-2, .editorial-equal-3, .editorial-side-1, .editorial-side-2, .editorial-compact-1, .editorial-compact-2 { grid-column: 1 / 4; }
+            .features-grid { grid-template-columns: 1fr; gap: 60px; } .experts-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-content { flex-direction: column; gap: 40px; text-align: center; } .footer-brand-section { max-width: 100%; }
+            .footer-legal { flex-direction: column; gap: 16px; } .scroll-top { bottom: 24px; right: 24px; width: 48px; height: 48px; }
+            .detail-title { font-size: 40px; }
+        }
+        @media (max-width: 768px) {
+            .header-container, .container, .detail-content { padding: 24px; } .hero { padding: 120px 24px 80px; min-height: 70vh; }
+            .hero-title { font-size: 42px; } .hero-subtitle { font-size: 16px; } .hero-cta { flex-direction: column; } .cta-button { width: 100%; }
+            .section-title { font-size: 32px; } .bento-grid { grid-template-columns: 1fr; }
+            .editorial-featured, .editorial-hero-1, .editorial-hero-2, .editorial-equal-1, .editorial-equal-2, .editorial-equal-3,
+            .editorial-wide, .editorial-side-1, .editorial-side-2, .editorial-compact-1, .editorial-compact-2, .editorial-tall { grid-column: span 1; }
+            .features-section { padding: 80px 24px; } .features-header h2 { font-size: 36px; }
+            .final-cta { padding: 80px 24px; } .final-cta h2 { font-size: 36px; }
+            .app-store-buttons { flex-direction: column; } .app-store-btn { width: 100%; justify-content: center; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+            .detail-title { font-size: 32px; } .detail-paragraph { font-size: 16px; }
+            .detail-image { width: calc(100% + 48px); margin-left: -24px; }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="header-container">
+            <div class="logo" onclick="showMainPage()"><img src="https://i.imgur.com/SOUOzsm.png" alt="VVELLFLO"></div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showMainPage()">Home</a></li>
+                <li><a href="#content">Content</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+            <div class="header-actions">
+                <button class="icon-btn">⊕</button>
+                <button class="icon-btn menu-icon">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 상세페이지 -->
+    <div class="detail-page" id="detailPage">
+        <div class="detail-content">
+            <a href="#" class="detail-back" onclick="showMainPage()">← Back to Home</a>
+            <div class="detail-category" id="detailCategory">Morning Ritual</div>
+            <h1 class="detail-title" id="detailTitle">침대에서 시작하는 5분 모닝 루틴</h1>
+            <div class="detail-meta">
+                <span class="detail-meta-item">⏱ 5분 소요</span>
+                <span class="detail-meta-item">📊 입문자용</span>
+                <span class="detail-meta-item">🛏 침대에서</span>
+                <span class="detail-meta-item">📅 2025년 10월</span>
+            </div>
+            <div class="detail-image">
+                <img id="detailMainImage" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1400&q=80" alt="모닝 스트레칭">
+                <p class="detail-image-caption">Photo: Unsplash</p>
+            </div>
+            <p class="detail-paragraph" id="detailIntro">
+                매일 아침 일어나는 순간이 가장 중요합니다. 몸이 완전히 깨어나기 전, 침대에서 할 수 있는 간단한 스트레칭으로 하루를 시작해보세요. 단 5분이면 충분합니다. 수면 중 우리 몸은 장시간 같은 자세를 유지하게 되는데, 이로 인해 근육이 경직되고 혈액 순환이 원활하지 않을 수 있습니다.
+            </p>
+            <p class="detail-paragraph" id="detailPara1">
+                아침 스트레칭은 이러한 경직을 풀어주고, 온몸에 산소를 공급하여 하루를 활기차게 시작할 수 있게 도와줍니다. 또한 침대에서 바로 시작할 수 있다는 점이 가장 큰 장점입니다. 별도의 공간이나 도구 없이, 알람을 끄자마자 바로 실천할 수 있어 루틴으로 만들기에 완벽합니다.
+            </p>
+            <h2 class="detail-subheading">왜 아침 스트레칭이 중요할까요?</h2>
+            <p class="detail-paragraph">
+                많은 전문가들이 아침 스트레칭의 중요성을 강조합니다. 우리 몸은 밤새 정지 상태에 가까운 자세로 7-8시간을 보내게 되는데, 이는 근육과 관절에 상당한 부담을 줄 수 있습니다. 특히 목과 어깨, 허리 부분은 수면 자세에 따라 큰 영향을 받게 됩니다.
+            </p>
+            <div class="detail-image-small">
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80" alt="명상">
+                <p class="detail-image-caption">고요한 아침, 나만의 시간을 시작하는 순간</p>
+            </div>
+            <p class="detail-paragraph">
+                아침 스트레칭은 단순히 몸을 푸는 것 이상의 효과가 있습니다. 혈액 순환을 촉진하고, 림프계를 활성화시키며, 신경계를 깨우는 역할을 합니다. 이는 하루 종일 지속되는 에너지 레벨과 집중력에 직접적인 영향을 미칩니다.
+            </p>
+            <div class="detail-quote">
+                "아침 루틴은 하루를 결정합니다. 단 5분의 투자가 24시간의 퀄리티를 바꿉니다."
+            </div>
+            <h2 class="detail-subheading">5분 모닝 스트레칭 가이드</h2>
+            <p class="detail-paragraph">
+                <strong>1단계: 전신 스트레칭 (1분)</strong><br>
+                침대에 누운 채로 팔과 다리를 쭉 뻗어보세요. 마치 고양이가 기지개를 켜듯이 온몸을 늘려줍니다. 손끝부터 발끝까지 힘을 주었다가 천천히 이완하세요. 이 동작은 수면 중 경직된 근육을 깨우는 가장 기본적인 움직임입니다.
+            </p>
+            <div class="detail-image-small">
+                <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800&q=80" alt="스트레칭">
+            </div>
+            <p class="detail-paragraph">
+                <strong>2단계: 목과 어깨 풀기 (1분)</strong><br>
+                앉은 자세로 천천히 목을 좌우로 돌려주세요. 어깨를 앞뒤로 크게 돌리며 경직된 근육을 풀어줍니다. 깊게 숨을 들이마시며 진행하세요. 현대인들이 가장 많이 겪는 목과 어깨 통증을 예방하는 핵심 동작입니다.
+            </p>
+            <p class="detail-paragraph">
+                <strong>3단계: 허리 비틀기 (1분)</strong><br>
+                누운 상태에서 무릎을 세우고 좌우로 천천히 비틀어줍니다. 허리와 척추의 긴장을 풀어주는 동작으로, 호흡과 함께 부드럽게 진행하세요. 이 동작은 디스크 건강에도 매우 유익합니다.
+            </p>
+            <p class="detail-paragraph">
+                <strong>4단계: 다리 스트레칭 (1분)</strong><br>
+                침대 끝에 앉아 다리를 쭉 뻗고 발목을 천천히 돌려주세요. 종아리와 허벅지를 가볍게 주무르며 혈액 순환을 촉진합니다. 하체의 부종을 예방하고 에너지 흐름을 원활하게 만듭니다.
+            </p>
+            <p class="detail-paragraph">
+                <strong>5단계: 심호흡 마무리 (1분)</strong><br>
+                편안하게 앉아 눈을 감고 깊은 호흡을 5회 반복합니다. 코로 천천히 들이마시고, 입으로 길게 내쉬며 하루를 맞이할 준비를 합니다. 이 순간이 당신의 하루를 설계하는 시간입니다.
+            </p>
+            <h2 class="detail-subheading">꾸준히 실천하는 팁</h2>
+            <p class="detail-paragraph">
+                처음에는 5분도 길게 느껴질 수 있습니다. 하지만 21일만 꾸준히 실천하면 자연스러운 습관이 됩니다. 알람을 5분 일찍 맞춰두고, 알람이 울리면 바로 스트레칭부터 시작하세요. 완벽하게 하려고 하지 마세요. 어떤 날은 3분만 해도 괜찮습니다.
+            </p>
+            <div class="detail-image">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1400&q=80" alt="요가">
+                <p class="detail-image-caption">매일 아침, 나를 위한 시간</p>
+            </div>
+            <p class="detail-paragraph">
+                중요한 건 매일 아침 나를 위한 시간을 가진다는 것, 그 자체입니다. 이 5분이 당신의 하루 24시간을 바꿀 것입니다. 많은 사람들이 이 간단한 루틴으로 인생이 변화했다고 말합니다. 당신도 오늘부터 시작해보세요.
+            </p>
+            <div style="text-align: center; margin: 80px 0; padding: 60px 40px; background: var(--surface); border: 1px solid var(--border);">
+                <h3 style="font-family: var(--font-serif); font-size: 32px; margin-bottom: 16px;">이 루틴을 시작하시겠어요?</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 32px;">앱에서 TO DO 리스트에 추가하고 매일 리마인더를 받아보세요</p>
+                <button class="cta-button cta-button-primary" onclick="alert('앱 다운로드 기능 (프로토타입)')">앱 다운로드하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 메인페이지 -->
+    <div class="main-page" id="mainPage">
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="hero-label">Wellness Reimagined</div>
+                <h1 class="hero-title">Your Daily <span>Ritual</span></h1>
+                <p class="hero-subtitle">200개의 감성 웰니스 콘텐츠로 시작하는 나만의 루틴. 5분이면 충분합니다.</p>
+                <div class="hero-cta">
+                    <button class="cta-button cta-button-primary" onclick="document.getElementById('download').scrollIntoView({behavior:'smooth'})">앱 다운로드</button>
+                    <button class="cta-button" onclick="document.getElementById('content').scrollIntoView({behavior:'smooth'})">콘텐츠 보기</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="container" id="content">
+            <section>
+                <div class="section-header">
+                    <div class="section-label">Featured Content</div>
+                    <h2 class="section-title">오늘의 추천 루틴</h2>
+                    <p class="section-subtitle">전문가가 큐레이션한 200+ 웰니스 콘텐츠</p>
+                </div>
+                <div class="bento-grid">
+                    <article class="editorial-card editorial-featured" onclick="openDetail('morning-ritual')">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80" alt="모닝 루틴" class="card-image">
+                            <div class="card-overlay">
+                                <div class="card-category">Morning Ritual</div>
+                                <h3 class="card-title">침대에서 시작하는<br>5분 모닝 루틴</h3>
+                                <p class="card-excerpt">눈 뜨자마자 침대에서 바로 시작할 수 있는 부드러운 스트레칭</p>
+                                <div class="card-meta"><span>⏱ 5 Min</span><span>📊 Beginner</span></div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-hero-1" onclick="openDetail('mindfulness')">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" alt="명상" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Mindfulness</div><h3 class="card-title">3분 마음챙김 명상</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-hero-2" onclick="openDetail('nutrition')">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="건강 식단" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Nutrition</div><h3 class="card-title">에너지 부스트 레시피</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-equal-1">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80" alt="홈트" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Movement</div><h3 class="card-title">점심 시간 스트레칭</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-equal-2">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&q=80" alt="요가" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Yoga</div><h3 class="card-title">저녁 요가 플로우</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-equal-3">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500&q=80" alt="수면" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Sleep</div><h3 class="card-title">숙면 호흡법</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-wide">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800&q=80" alt="필라테스" class="card-image">
+                            <div class="card-overlay">
+                                <div class="card-category">Pilates</div>
+                                <h3 class="card-title">코어 강화 필라테스</h3>
+                                <p class="card-excerpt">복부와 허리를 강화하는 10분 루틴</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-side-1">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&q=80" alt="커피" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Ritual</div><h3 class="card-title">모닝 커피 루틴</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-side-2">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80" alt="저널링" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Journaling</div><h3 class="card-title">감사 일기</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-compact-1">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1540206395-68808572332f?w=400&q=80" alt="워킹" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Walking</div><h3 class="card-title">걷기 명상</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-compact-2">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80" alt="독서" class="card-image">
+                            <div class="card-overlay"><div class="card-category">Reading</div><h3 class="card-title">저녁 독서 시간</h3></div>
+                        </div>
+                    </article>
+                    <article class="editorial-card editorial-tall">
+                        <div class="card-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1447452001602-7090c7ab2db3?w=800&q=80" alt="자연" class="card-image">
+                            <div class="card-overlay">
+                                <div class="card-category">Nature</div>
+                                <h3 class="card-title">자연 속에서 호흡하기</h3>
+                                <p class="card-excerpt">주말, 자연과 함께하는 웰니스 루틴</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <section class="features-section" id="features">
+            <div class="features-container">
+                <div class="features-header">
+                    <h2>앱에서 더 많은 기능을</h2>
+                    <p>콘텐츠를 넘어 완벽한 웰니스 관리 도구</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h3>맞춤 TO DO 리스트</h3>
+                            <p>매일 아침 당신의 목표에 맞춘 루틴을 자동으로 추천하고, 완료 여부를 트래킹합니다.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">❤️</div>
+                        <div class="feature-content">
+                            <h3>감정 기록 캘린더</h3>
+                            <p>매일의 기분과 상태를 기록하고 패턴을 분석하여 당신에게 맞는 루틴을 찾아갑니다.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-content">
+                            <h3>진행 상황 트래킹</h3>
+                            <p>루틴 실천 횟수와 연속 기록을 한눈에 확인하고 동기부여를 받으세요.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔔</div>
+                        <div class="feature-content">
+                            <h3>스마트 리마인더</h3>
+                            <p>당신의 생활 패턴을 학습하여 최적의 시간에 루틴을 상기시켜줍니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="expertise-section">
+            <div class="expertise-container">
+                <div class="expertise-header">
+                    <h2>전문가와 함께 만듭니다</h2>
+                    <p>검증된 전문가들이 직접 콘텐츠를 제작하고 큐레이션합니다</p>
+                </div>
+                <div class="experts-grid">
+                    <div class="expert-card">
+                        <div class="expert-avatar">🧘</div>
+                        <h3 class="expert-name">요가 전문가</h3>
+                        <p class="expert-title">국제 요가 강사 자격 보유</p>
+                        <p class="expert-bio">15년 경력의 요가 마스터가 초보자도 쉽게 따라할 수 있는 루틴을 설계합니다.</p>
+                    </div>
+                    <div class="expert-card">
+                        <div class="expert-avatar">🧠</div>
+                        <h3 class="expert-name">명상 전문가</h3>
+                        <p class="expert-title">마음챙김 명상 지도사</p>
+                        <p class="expert-bio">과학적으로 검증된 명상 기법을 일상에 적용 가능하도록 재구성합니다.</p>
+                    </div>
+                    <div class="expert-card">
+                        <div class="expert-avatar">💪</div>
+                        <h3 class="expert-name">필라테스 전문가</h3>
+                        <p class="expert-title">재활 필라테스 강사</p>
+                        <p class="expert-bio">부상 없이 안전하게 코어를 강화하는 홈트 루틴을 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta" id="download">
+            <h2>지금 시작하세요</h2>
+            <p>첫 5분이 당신의 인생을 바꿉니다</p>
+            <div class="app-store-buttons">
+                <a href="#" class="app-store-btn" onclick="event.preventDefault(); alert('App Store 연동 (프로토타입)')">
+                    <span style="font-size: 32px;">🍎</span>
+                    <span>
+                        <span class="app-store-label">Download on</span>
+                        <span class="app-store-name">App Store</span>
+                    </span>
+                </a>
+                <a href="#" class="app-store-btn" onclick="event.preventDefault(); alert('Google Play 연동 (프로토타입)')">
+                    <span style="font-size: 32px;">📱</span>
+                    <span>
+                        <span class="app-store-label">Get it on</span>
+                        <span class="app-store-name">Google Play</span>
+                    </span>
+                </a>
+            </div>
+            <p class="free-note">완전 무료 · 광고 없음 · 가입 불필요</p>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-brand-section">
+                    <div class="footer-brand">
+                        <img src="https://i.imgur.com/SOUOzsm.png" alt="VVELLFLO">
+                    </div>
+                    <p class="footer-tagline">5분으로 시작하는 나만의 웰니스 루틴</p>
+                </div>
+                <div class="footer-legal">
+                    <a href="#" onclick="event.preventDefault(); alert('개인정보처리방침 페이지 (준비 중)')">개인정보처리방침</a>
+                    <a href="#" onclick="event.preventDefault(); alert('이용약관 페이지 (준비 중)')">이용약관</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 vvellflo. Made with care in Seoul.</p>
+            </div>
+        </footer>
+    </div>
+
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script>
+        const contentData = {
+            'morning-ritual': {
+                category: 'Morning Ritual',
+                title: '침대에서 시작하는 5분 모닝 루틴',
+                image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1400&q=80'
+            },
+            'mindfulness': {
+                category: 'Mindfulness',
+                title: '3분 마음챙김 명상',
+                image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1400&q=80'
+            },
+            'nutrition': {
+                category: 'Nutrition',
+                title: '에너지 부스트 레시피',
+                image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1400&q=80'
+            }
+        };
+
+        function openDetail(contentId) {
+            const data = contentData[contentId];
+            if (!data) return;
+
+            document.getElementById('detailCategory').textContent = data.category;
+            document.getElementById('detailTitle').textContent = data.title;
+            document.getElementById('detailMainImage').src = data.image;
+
+            showDetailPage();
+        }
+
+        function showDetailPage() {
+            document.getElementById('mainPage').classList.add('hidden');
+            document.getElementById('detailPage').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showMainPage() {
+            event.preventDefault();
+            document.getElementById('mainPage').classList.remove('hidden');
+            document.getElementById('detailPage').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('detailPage').style.display = 'none';
+            }, 600);
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const scrollTop = document.getElementById('scrollTop');
+            if (header && window.scrollY > 100) {
+                header.classList.add('scrolled');
+                if (scrollTop) scrollTop.classList.add('visible');
+            } else {
+                if (header) header.classList.remove('scrolled');
+                if (scrollTop) scrollTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
