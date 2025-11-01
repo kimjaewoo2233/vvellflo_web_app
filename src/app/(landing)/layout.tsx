@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { PropsWithChildren } from "react";
 import LandingHeader from "@/components/layout/LandingHeader";
 import LandingFooter from "@/components/layout/LandingFooter";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "vvellflo - 건강한 삶을 위한 헬스케어 콘텐츠",
@@ -106,7 +107,9 @@ export default function LandingLayout({ children }: PropsWithChildren) {
       {/* Main Content with proper spacing for fixed header */}
       <main className="min-h-screen pt-16 md:pt-20">
         {/* Max width container for landing content */}
-        <div className="w-full">{children}</div>
+        <div className="w-full">
+          <QueryProvider>{children}</QueryProvider>
+        </div>
       </main>
 
       <LandingFooter />

@@ -26,17 +26,17 @@ export default function LandingPage() {
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <ScrollReveal>
-            <h1 className="text-5xl md:text-7xl font-bold text-[--text-primary] mb-6">
+            <h1 className="text-4xl md:text-7xl font-bold text-[--text-primary] mb-6">
               건강한 삶을 위한
             </h1>
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-8 px-2 md:px-0">
               <VvellfloLogo
                 width={400}
                 height={87}
-                className="h-20 md:h-24 w-auto"
+                className="h-20 md:h-24 md:w-auto w-[16rem]"
               />
             </div>
           </ScrollReveal>

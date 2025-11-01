@@ -14,20 +14,33 @@ export interface Writer {
   nickname: string;
 }
 
-/**
- * 블로그 포스트 타입
- */
+export interface BlogImage {
+  id: number;
+  imageUrl: string;
+  postId: number;
+  sortOrder: number;
+  caption: string;
+  createdAt: string;
+}
+
 export interface BlogPost {
   id: number;
   title: string;
   content: string;
-  thumbnail: string;
+  summary: string;
+  orderNo: number;
   createdAt: string;
+  updatedAt: string;
   category: BlogCategory;
-  writer: Writer;
-  viewCount: number;
+  images: BlogImage[];
+  isHot: boolean;
+  isLike: boolean;
   likeCount: number;
-  isLiked: boolean;
+  viewCount: number;
+  imageUrl?: string;
+  thumbnail?: string;
+  writer?: Writer;
+  isLiked?: boolean;
 }
 
 /**
