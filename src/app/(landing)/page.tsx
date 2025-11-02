@@ -1,24 +1,29 @@
 "use client";
 
 import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import VvellfloLogo from "@/components/icons/VvellfloLogo";
 import BentoGrid from "@/components/blog/BentoGrid";
-import { toastInfo, toastSuccess } from "@/lib/toast";
 import { FiLayers, FiBookOpen, FiZap } from "react-icons/fi";
 
 export default function LandingPage() {
+  const router = useRouter();
+
   const handleExploreClick = useCallback(() => {
-    toastSuccess("콘텐츠 큐레이션을 준비하고 있어요! 곧 만나보세요 ✨", {
-      autoClose: 2600,
-    });
+    const contentSection = document.getElementById("content");
+    if (contentSection) {
+      contentSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }, []);
 
   const handleLearnMoreClick = useCallback(() => {
-    toastInfo("vvellflo의 여정을 소개하는 페이지를 준비 중입니다.", {
-      autoClose: 2600,
-    });
-  }, []);
+    router.push("/flo");
+  }, [router]);
+
+  const handleBlogClick = useCallback(() => {
+    router.push("/flo");
+  }, [router]);
 
   return (
     <>
@@ -152,7 +157,10 @@ export default function LandingPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.4}>
-            <button className="group relative px-8 py-4 bg-[--background] text-white border-2 border-white/30 hover:border-white rounded-lg overflow-hidden transition-all duration-300 text-lg font-semibold shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95">
+            <button
+              onClick={handleBlogClick}
+              className="group relative px-8 py-4 bg-[--background] text-white border-2 border-white/30 hover:border-white rounded-lg overflow-hidden transition-all duration-300 text-lg font-semibold shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
+            >
               <span className="relative z-10">블로그 보러가기</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>

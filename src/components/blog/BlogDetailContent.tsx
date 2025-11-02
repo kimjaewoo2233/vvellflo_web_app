@@ -71,7 +71,7 @@ export default function BlogDetailContent({ post }: BlogDetailContentProps) {
           <motion.div
             key={`text-${part.content}`}
             variants={itemVariants}
-            className="whitespace-pre-wrap text-[--text-primary] leading-relaxed text-sm sm:text-base lg:text-lg"
+            className="whitespace-pre-wrap text-[--text-primary] leading-relaxed text-md sm:text-md lg:text-lg"
           >
             {text.split("\n").map((line, lineIndex) => (
               <div key={lineIndex} className="mb-3 sm:mb-4">

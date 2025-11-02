@@ -3,6 +3,7 @@
 import BlogCard from "./BlogCard";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import { useRelatedBlogPostsQuery } from "@/hooks/queries/useRelatedBlogPostsQuery";
+import clsx from "clsx";
 
 export default function BentoGrid() {
   // 임시로 ID 97번의 관련 포스트를 가져옴 (실제로는 featured 포스트 목록 API 필요)
@@ -86,27 +87,36 @@ export default function BentoGrid() {
           </div>
         </ScrollReveal>
 
-        <div
-          className="grid grid-cols-12 gap-3 sm:gap-4 lg:gap-5 auto-rows-auto"
-          style={{ gridAutoFlow: "dense" }}
-        >
-          {posts.slice(0, 12).map((post, index) => (
-            <BlogCard
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              category={post.category.name}
-              images={post.images ?? []}
-              excerpt={index === 0 ? post.summary : undefined}
-              // meta={
-              //   index === 0
-              //     ? { duration: "5 Min", level: "Beginner" }
-              //     : undefined
-              // }
-              variant={cardVariants[index] || "equal"}
-              animationDelay={index * 0.05}
-            />
-          ))}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
+          {posts.slice(0, 4).map((post, index) => {
+            // 첫 번째 행: 2:1 비율 (col-span-2, col-span-1)
+            // 두 번째 행: 1:2 비율 (col-span-1, col-span-2)
+            const colSpan =
+              index === 0
+                ? "col-span-2"
+                : index === 1
+                ? "col-span-1"
+                : index === 2
+                ? "col-span-1"
+                : "col-span-2";
+
+            return (
+              <BlogCard
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                category={post.category.name}
+                images={post.images ?? []}
+                excerpt={index === 0 ? post.summary : undefined}
+                variant="equal"
+                animationDelay={index * 0.05}
+                className={clsx(
+                  "min-w-0 min-h-0 h-full w-full relative",
+                  colSpan
+                )}
+              />
+            );
+          })}
         </div>
 
         {posts.length === 0 && !loading && (

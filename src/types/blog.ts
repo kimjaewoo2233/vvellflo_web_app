@@ -81,3 +81,57 @@ export interface BlogListParams {
   search?: string;
   sortBy?: "latest" | "popular" | "views";
 }
+
+/**
+ * 커서 페이징 메타 정보
+ */
+export interface CursorPaginationMeta {
+  count: number;
+  limit: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+  nextCursor: number | null;
+  prevCursor: number | null;
+  currentCursor: number | null;
+  sortDirection: "ASC" | "DESC";
+}
+
+/**
+ * 페이지네이션 메타 정보
+ */
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+/**
+ * 블로그 리스트 API 응답 메타
+ */
+export interface BlogListResponseMeta {
+  timestamp: string;
+  pagination: PaginationMeta;
+  cursorPagination: CursorPaginationMeta;
+}
+
+/**
+ * 블로그 리스트 API 응답
+ */
+export interface BlogListApiResponse {
+  success: boolean;
+  message: string;
+  data: BlogPost[];
+  meta: BlogListResponseMeta;
+}
+
+/**
+ * 블로그 리스트 조회 파라미터
+ */
+export interface BlogListQueryParams {
+  limit?: number;
+  sort?: "ASC" | "DESC";
+  cursor?: number;
+}

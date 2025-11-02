@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, useCallback, useRef } from "react";
+import { MouseEvent, useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import FallbackImage from "@/components/common/FallbackImage";
@@ -34,6 +34,7 @@ interface BlogCardProps {
     | "compact"
     | "tall";
   animationDelay?: number;
+  className?: string;
 }
 
 export default function BlogCard({
@@ -45,32 +46,28 @@ export default function BlogCard({
   meta,
   variant = "equal",
   animationDelay = 0,
+  className,
 }: BlogCardProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
     // Link 컴포넌트의 기본 동작 사용
   }, []);
 
   const getGridClass = () => {
+    // 부모 그리드에서 반응형 처리하므로 여기서는 기본값만 반환
     switch (variant) {
       case "featured":
-        return "col-span-12 lg:col-span-8 lg:row-span-2";
       case "hero":
-        return "col-span-12 lg:col-span-4";
       case "equal":
-        return "col-span-12 md:col-span-6 lg:col-span-4";
-      case "wide":
-        return "col-span-12 lg:col-span-6";
-      case "side":
-        return "col-span-6 lg:col-span-3";
-      case "compact":
-        return "col-span-6 lg:col-span-3";
       case "tall":
-        return "col-span-12 md:col-span-6 lg:col-span-4";
+      case "side":
+      case "compact":
+      case "wide":
       default:
-        return "col-span-12 md:col-span-6 lg:col-span-4";
+        return "w-full";
     }
   };
 
@@ -116,50 +113,69 @@ export default function BlogCard({
   };
 
   return (
-    <motion.article
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{
-        duration: 0.6,
-        delay: animationDelay,
-        ease: [0.25, 0.4, 0.25, 1],
-      }}
-      className={`${getGridClass()} min-w-0`}
-    >
+    <article ref={ref} className={className || "w-full min-w-0 min-h-0"}>
       <Link
         href={`/flo/${id}`}
-        className="block h-full bg-[--surface] border border-[--border] rounded-lg overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:border-[#7DD5F3] hover:shadow-[0_8px_32px_rgba(0,0,0,0.6)] hover:-translate-y-1 active:scale-[0.98] group"
+        className="flex flex-col min-w-0 h-full min-h-[400px] bg-gray-900 border border-gray-700 rounded-xl overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:border-[#7DD5F3] hover:shadow-[0_20px_60px_rgba(125,213,243,0.2)] active:scale-[0.98] group"
         onClick={handleClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <div className={`relative overflow-hidden ${getImageWrapperClass()}`}>
+        {/* 이미지 영역 */}
+        <div className={`relative overflow-hidden w-full h-full`}>
           <FallbackImage
             src={images?.[0]?.imageUrl || ""}
             alt={title}
             fill
             className="object-cover transition-all duration-700 ease-out brightness-90 group-hover:scale-110 group-hover:brightness-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,10,10,0.95)] via-[rgba(10,10,10,0.4)] to-transparent" />
 
-          <div
-            className={`absolute bottom-0 left-0 right-0 ${getContentPadding()} transform transition-transform duration-500 ease-out group-hover:translate-y-[-4px]`}
-          >
-            <div className="text-[9px] sm:text-[10px] tracking-[1.5px] sm:tracking-[2px] uppercase text-[#7DD5F3] mb-1.5 sm:mb-2.5 font-semibold transition-colors duration-300 group-hover:text-[#A0E7FF]">
+          {/* 그라디언트 오버레이 */}
+          <div className="absolute inset-0 bg-linear-to-t from-[rgba(10,10,10,0.85)] via-[rgba(10,10,10,0.3)] to-transparent pointer-events-none" />
+
+          {/* 배지 */}
+          <div className="absolute top-3 sm:top-4 right-3 sm:right-4 px-2 sm:px-3 py-1 sm:py-1.5 bg-[#7DD5F3]/20 backdrop-blur-md border border-[#7DD5F3]/50 rounded-full">
+            <div className="text-[9px] sm:text-[10px] font-bold text-[#7DD5F3] uppercase tracking-wider">
               {category}
             </div>
-            <h3
-              className={`font-bold mb-2 sm:mb-2.5 leading-tight ${getTitleSize()} line-clamp-2 sm:line-clamp-3`}
+          </div>
+
+          {/* 콘텐츠 영역 */}
+          <div
+            className={`absolute bottom-0 left-0 right-0 px-4 pb-4 sm:pb-5 transform transition-all duration-500 ease-out group-hover:translate-y-[-4px] flex flex-col`}
+          >
+            <motion.h3
+              className={`font-bold mb-2 leading-tight text-white ${getTitleSize()} line-clamp-2 transition-all duration-300`}
               style={{ fontFamily: "var(--font-display)" }}
+              animate={{
+                letterSpacing: isHovered ? "0.5px" : "0px",
+              }}
             >
               {title}
-            </h3>
-            {excerpt && variant === "featured" && (
-              <p className="text-xs sm:text-sm text-[--text-secondary] leading-relaxed line-clamp-2 sm:line-clamp-3 mb-2 sm:mb-3 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+            </motion.h3>
+
+            {/* 요약 텍스트 */}
+            {excerpt && (
+              <motion.p
+                className="text-xs sm:text-sm text-gray-300 leading-relaxed line-clamp-2 mb-2 transition-opacity duration-300"
+                initial={{ opacity: 0, y: 10 }}
+                animate={
+                  isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
+                }
+                transition={{ duration: 0.3 }}
+              >
                 {excerpt}
-              </p>
+              </motion.p>
             )}
+
+            {/* 메타 정보 */}
             {meta && (
-              <div className="flex gap-2 sm:gap-3.5 text-[10px] sm:text-[11px] text-[--text-muted] mt-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+              <motion.div
+                className="flex gap-2 sm:gap-3.5 text-[10px] sm:text-[11px] text-gray-400 mt-auto opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                animate={{
+                  y: isHovered ? 0 : 4,
+                }}
+              >
                 {meta.duration && (
                   <span className="flex items-center gap-1">
                     ⏱ {meta.duration}
@@ -170,11 +186,11 @@ export default function BlogCard({
                     📊 {meta.level}
                   </span>
                 )}
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 }
