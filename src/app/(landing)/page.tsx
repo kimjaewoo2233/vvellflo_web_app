@@ -156,7 +156,7 @@ export default function LandingPage() {
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.4}>
+          {/* <ScrollReveal delay={0.4}>
             <button
               onClick={handleBlogClick}
               className="group relative px-8 py-4 bg-[--background] text-white border-2 border-white/30 hover:border-white rounded-lg overflow-hidden transition-all duration-300 text-lg font-semibold shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
@@ -164,7 +164,7 @@ export default function LandingPage() {
               <span className="relative z-10">블로그 보러가기</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
-          </ScrollReveal>
+          </ScrollReveal> */}
         </div>
       </section>
     </>

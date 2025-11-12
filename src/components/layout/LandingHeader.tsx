@@ -69,12 +69,12 @@ export default function LandingHeader() {
             >
               콘텐츠
             </Link>
-            <Link
+            {/* <Link
               href="#contact"
               className="text-[--text-secondary] hover:text-[--text-primary] transition-colors font-medium"
             >
               문의
-            </Link>
+            </Link> */}
             {/* <Link
               href="/blog"
               className="px-4 py-2 bg-gradient-to-r from-[--primary-from] to-[--primary-to] text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
